@@ -51,12 +51,17 @@ tasksSpace.addEventListener("click", (e) => {
 
   //Remover Tarea
   if(e.target.classList.contains("dltBtn")){
+     let eliminar =e.target.parentElement.querySelector(".task").textContent;
+     tareas = tareas.filter(tarea => tarea !== eliminar);
+     guardarTareas();
     e.target.parentElement.remove();
+   
   }
 });
 
-
-window.onload = renderizarTareas();
+document.addEventListener("DOMContentLoaded", ()=>{
+    renderizarTareas();
+})
 
 
 
