@@ -5,48 +5,69 @@ const completeSection = document.querySelector(".complete");
 const pendSection = document.querySelector(".pend");
 const btnComplete = document.querySelector(".cmplBtn");
 
-
 let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
-function guardarTareas(){
-    localStorage.setItem("tareas", JSON.stringify(tareas))
+function guardarTareas() {
+  localStorage.setItem("tareas", JSON.stringify(tareas));
 }
 
-function renderizarTareas(){
-     inpuTexto.value = "";
-     allSection.innerHTML = "";
+function renderizarTareas() {
+  inpuTexto.value = "";
+  allSection.innerHTML = "";
+  completeSection.innerHTML = "";
+  pendSection.innerHTML = "";
 
-     tareas.forEach(element => {
+  for (const t of tareas) {
+    
         allSection.innerHTML += `
             <div class="task-item">
-                <span class="task">${element.texto}</span>
+                <span class="task">${t.texto}</span>
                 <button class="dltBtn">Delete</button>
                 <button class="cmplBtn">Complete</button>
                 <button class="edBtn">Edit</button>
-            </div>`
-     });
-     
+            </div>`;
+      
 
+     if (t.complete === true && t.pendiente === false){
+        completeSection.innerHTML += `
+            <div class="task-item">
+                <span class="task">${t.texto}</span>
+                <button class="dltBtn">Delete</button>
+            </div>`;
+    }
+
+     if (t.complete === false && t.pendiente === true){
+        pendSection.innerHTML += `
+            <div class="task-item">
+                <span class="task">${t.texto}</span>
+                <button class="dltBtn">Delete</button>
+                <button class="cmplBtn">Complete</button>
+                <button class="edBtn">Edit</button>
+            </div>`;
+    } 
+      
+  }
 }
 
-function agregarTareas(textoPlano){
+function agregarTareas(textoPlano) {
   const texto = textoPlano.trim();
-  if(!texto) return;
+  if (!texto) return;
 
-  const nuevo ={
+  const nuevo = {
     texto,
-    complete:false,
-    pendiente: true
-  }
+    complete: false,
+    pendiente: true,
+  };
 
-  tareas.unshift(nuevo)
+  tareas.unshift(nuevo);
+  guardarTareas();
   renderizarTareas();
 }
 
-function borrarTareas(textoPlano){
+function borrarTareas(textoPlano) {
   const texto2 = textoPlano.trim();
 
-  tareas = tareas.filter(t=> t.texto !==texto2);
+  tareas = tareas.filter((t) => t.texto !== texto2);
   guardarTareas();
   renderizarTareas();
 }
@@ -54,49 +75,111 @@ function borrarTareas(textoPlano){
 //Agregar Tarea
 btnAgregar.addEventListener("click", () => {
   const texto = inpuTexto.value;
-  if (texto !== "") {   
-    agregarTareas(texto)
+  if (texto !== "") {
+    agregarTareas(texto);
     guardarTareas();
-    renderizarTareas();
-  }else{
-    alert("No puede agregar una tarea vacia")
+  } else {
+    alert("No puede agregar una tarea vacia");
   }
 });
 
-
 allSection.addEventListener("click", (e) => {
-    //Marca Tarea como completada
+  //Marca Tarea como completada
   if (e.target.classList.contains("cmplBtn")) {
-    const task = e.target.parentElement.querySelector(".task").textContent;
+    const task = e.target.parentElement.querySelector(".task");
     task.style.textDecoration = "line-through";
+    let indice = tareas.findIndex(t=> t.texto === task.textContent)
+    
+    tareas[indice].complete = true;
+    tareas[indice].pendiente = false;
+
+    guardarTareas();
+    renderizarTareas();
     
   }
 
   //Remover Tarea
-  if(e.target.classList.contains("dltBtn")){
-     let eliminar =e.target.parentElement.querySelector(".task").textContent;
-     alert(eliminar)
-     borrarTareas(eliminar)
+  if (e.target.classList.contains("dltBtn")) {
+    let eliminar = e.target.parentElement.querySelector(".task").textContent;
+    borrarTareas(eliminar);
   }
 
   //Editar Tareas
-  if(e.target.classList.contains("edBtn")){
+  if (e.target.classList.contains("edBtn")) {
     const task = e.target.parentElement.querySelector(".task").textContent;
-    let nuevoTexto = prompt("Introduzca la nueva tarea", task)
-    
-    if(nuevoTexto.trim()!==null && nuevoTexto !==""){
-      let index = tareas.findIndex(t=> t.texto === task)
+    let nuevoTexto = prompt("Introduzca la nueva tarea", task);
+
+    if (nuevoTexto.trim() !== null && nuevoTexto !== "") {
+      let index = tareas.findIndex((t) => t.texto === task);
       tareas[index].texto = nuevoTexto;
       guardarTareas();
       renderizarTareas();
     }
-    
   }
 });
 
-document.addEventListener("DOMContentLoaded", ()=>{
+completeSection.addEventListener("click", (e) => {
+  //Marca Tarea como completada
+  if (e.target.classList.contains("cmplBtn")) {
+    const task = e.target.parentElement.querySelector(".task").textContent;
+    task.style.textDecoration = "line-through";
+  }
+
+  //Remover Tarea
+  if (e.target.classList.contains("dltBtn")) {
+    let eliminar = e.target.parentElement.querySelector(".task").textContent;
+    borrarTareas(eliminar);
+  }
+
+  //Editar Tareas
+  if (e.target.classList.contains("edBtn")) {
+    const task = e.target.parentElement.querySelector(".task").textContent;
+    let nuevoTexto = prompt("Introduzca la nueva tarea", task);
+
+    if (nuevoTexto.trim() !== null && nuevoTexto !== "") {
+      let index = tareas.findIndex((t) => t.texto === task);
+      tareas[index].texto = nuevoTexto;
+      guardarTareas();
+      renderizarTareas();
+    }
+  }
+});
+
+pendSection.addEventListener("click", (e) => {
+  //Marca Tarea como completada
+  if (e.target.classList.contains("cmplBtn")) {
+    const task = e.target.parentElement.querySelector(".task");
+    task.style.textDecoration = "line-through";
+    let indice = tareas.findIndex(t=> t.texto === task.textContent)
+    
+    tareas[indice].complete = true;
+    tareas[indice].pendiente = false;
+
+    guardarTareas();
     renderizarTareas();
-})
+    
+  }
 
+  //Remover Tarea
+  if (e.target.classList.contains("dltBtn")) {
+    let eliminar = e.target.parentElement.querySelector(".task").textContent;
+    borrarTareas(eliminar);
+  }
 
+  //Editar Tareas
+  if (e.target.classList.contains("edBtn")) {
+    const task = e.target.parentElement.querySelector(".task").textContent;
+    let nuevoTexto = prompt("Introduzca la nueva tarea", task);
 
+    if (nuevoTexto.trim() !== null && nuevoTexto !== "") {
+      let index = tareas.findIndex((t) => t.texto === task);
+      tareas[index].texto = nuevoTexto;
+      guardarTareas();
+      renderizarTareas();
+    }
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderizarTareas();
+});
