@@ -4,11 +4,23 @@ const allSection = document.querySelector(".all");
 const completeSection = document.querySelector(".complete");
 const pendSection = document.querySelector(".pend");
 const btnComplete = document.querySelector(".cmplBtn");
+const contadorTareasAll = document.querySelector(".counterAll")
+const contadorTareasComplete = document.querySelector(".counterComplete")
+const contadorTareasPendiente = document.querySelector(".counterPendiente")
+
 
 let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 
 function guardarTareas() {
   localStorage.setItem("tareas", JSON.stringify(tareas));
+}
+
+
+
+function contadorTareas(){
+  contadorTareasAll.innerHTML=allSection.childElementCount
+  contadorTareasComplete.innerHTML=completeSection.childElementCount
+  contadorTareasPendiente.innerHTML=pendSection.childElementCount
 }
 
 function renderizarTareas() {
@@ -47,6 +59,8 @@ function renderizarTareas() {
     } 
       
   }
+
+  contadorTareas();
 }
 
 function agregarTareas(textoPlano) {
@@ -59,9 +73,11 @@ function agregarTareas(textoPlano) {
     pendiente: true,
   };
 
+
   tareas.unshift(nuevo);
   guardarTareas();
   renderizarTareas();
+
 }
 
 function borrarTareas(textoPlano) {
@@ -82,6 +98,8 @@ btnAgregar.addEventListener("click", () => {
     alert("No puede agregar una tarea vacia");
   }
 });
+
+
 
 allSection.addEventListener("click", (e) => {
   //Marca Tarea como completada
