@@ -3,25 +3,42 @@ const btnAgregar = document.getElementById("addBtn");
 const tasksSpace = document.querySelector(".task-list");
 const btnComplete = document.querySelector(".cmplBtn");
 
-//Agregar Tarea
-btnAgregar.addEventListener("click", () => {
-  const texto = inpuTexto.value.trim();
-  if (texto !== "") {
-    tasksSpace.innerHTML += `
+
+let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+
+function guardarTareas(){
+    localStorage.setItem("tareas", JSON.stringify(tareas))
+}
+
+function renderizarTareas(){
+     inpuTexto.value = "";
+     tasksSpace.innerHTML = "";
+
+     tareas.forEach(element => {
+        tasksSpace.innerHTML += `
             <li class="task-item">
-                <span class="task">${texto}</span>
+                <span class="task">${element}</span>
                 <button class="dltBtn">Delete</button>
                 <button class="cmplBtn">Complete</button>
                 <button class="edBtn">Edit</button>
             </li>`
+     });
+     
 
-    
-    inpuTexto.value = "";
+}
+
+
+//Agregar Tarea
+btnAgregar.addEventListener("click", () => {
+  const texto = inpuTexto.value.trim();
+  if (texto !== "") {   
+    tareas.push(texto);
+    guardarTareas();
+    renderizarTareas();
   }else{
     alert("No puede agregar una tarea vacia")
   }
 });
-
 
 
 tasksSpace.addEventListener("click", (e) => {
@@ -37,5 +54,9 @@ tasksSpace.addEventListener("click", (e) => {
     e.target.parentElement.remove();
   }
 });
+
+
+window.onload = renderizarTareas();
+
 
 
