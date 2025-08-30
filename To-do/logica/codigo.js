@@ -57,6 +57,19 @@ tasksSpace.addEventListener("click", (e) => {
     e.target.parentElement.remove();
    
   }
+
+  //Editar Tareas
+  if(e.target.classList.contains("edBtn")){
+    const task = e.target.parentElement.querySelector(".task");
+    let nuevoTexto = prompt("Introduce una nueva tarea", task.textContent);
+    if(nuevoTexto.trim !=="" && nuevoTexto !=="" && nuevoTexto !== null){
+      let reemplazo = tareas.indexOf(task.textContent)
+      tareas[reemplazo] = nuevoTexto;
+      task.textContent = nuevoTexto;
+      guardarTareas();
+      renderizarTareas();
+    }
+  }
 });
 
 document.addEventListener("DOMContentLoaded", ()=>{
