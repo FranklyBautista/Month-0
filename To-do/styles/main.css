@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
+:root{
+  --back-color: #FAF0E6;
+  --header-color: #B9B4C7;
+  --border-width: 3px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Hace que el ancho/alto incluya padding y border */
+}
+
+h1{
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+#date{
+  font-size: 1.2rem;
+}
+
+header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: var(--border-width) solid black;
+  border-radius: 5px 5px 0px 0px;
+  background-color: var(--header-color);
+}
+
+main{
+  border: var(--border-width) solid black;
+  border-radius: 9px;
+  width: 95%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  font-family:  "Jersey 15", sans-serif;
+  font-style: normal;
+  background-color: var(--back-color);
+}
+
+
+
+.wrap-container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+ 
+.lateral{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+
+  border-right: var(--border-width) solid #000; /* si quieres remarcar el lado derecho */
+  border-radius: 0 0 0 9px;
+  overflow: hidden; /* recorta separadores dentro del radio */
+  box-sizing: border-box;
+}
+
+.box{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: .5rem;
+  font-size: 1.5em;
+}
+
+.box > h2{
+  padding-bottom: 10px;
+}
+
+
+
+.box + .box{
+  border-top: var(--border-width) solid #000;
+}
+
+.box:first-child{
+  display: flex;
+  flex-direction: column;
+}
+
+.box:nth-child(2){
+  background-color: var(--header-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  text-align: start;
+  gap: 8px;
+}
+
+.box:last-child{
+  border-radius: 0px 0px 0px 9px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  text-align: center;
+}
+
+.tasks{
+  display: flex;
+  flex-direction: row;
+}
+
+.input-section{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+#taskInput{
+  width: 60%;
+}

@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-do List</title>
-</head>
-<body>
-    <h1>TO DO LIST</h1>
-    <input type="text" id="taskInput" placeholder="Enter a new task" autocomplete="off">
-    <button id="addBtn">add.</button>
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>RETRO TO-DO</h1>
+        <span id="date">31 de Agosto de 2025</span>
+      </header>
 
-    <section class="tasks">
-    <details class="all-section">
-        <summary>Todas <span class="counterAll">0</span></summary>
-        <div class="all">
+      <div class="wrap-container">
+        <aside class="lateral">
+            <div class="box">
+                <h2>Filtros</h2>
+                <span>Prioridad Alta</span>
+                <span>Prioridad Media</span>
+                <span>Prioridad Baja</span>
+                <span>Mas recientes</span>
+                <span>Mas antiguos</span>
+            </div>
+            <div class="box">
+                <h2>STATS</h2>
+                <span>X Tareas completadas</span>
+                <span>X Tareas Pendientes</span>
+            </div>
+            <div class="box">
+                <span>@ 2025 Retro To-do</span>
+            </div>
+        </aside>
+        <section class="input-section">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Enter a new task"
+            autocomplete="off"
+          />
+          <select name="prioidad-options" id="opPriodidad">
+            <option value="alta">Alta</option>
+            <option value="media">Media</option>
+            <option value="baja">Baja</option>
+          </select>
+          <button id="addBtn">add.</button>
+        </section>
 
-        </div>
-    </details>
-    <details class="complete-section">
-        <summary>Completadas <span class="counterComplete">0</span></summary>
-        <div class="complete">
-
-        </div>
-    </details>
-    <details class="pend-section">
-        <summary>Pendientes <span class="counterPendiente">0</span></summary>
-       <div class="pend">
-
-       </div>
-    </details>
-    </section>
-    
-
+        <section class="tasks">
+          <details class="all-section">
+            <summary>Todas <span class="counterAll">0</span></summary>
+            <div class="all"></div>
+          </details>
+          <details class="complete-section">
+            <summary>
+              Completadas <span class="counterComplete">0</span>
+            </summary>
+            <div class="complete"></div>
+          </details>
+          <details class="pend-section">
+            <summary>
+              Pendientes <span class="counterPendiente">0</span>
+            </summary>
+            <div class="pend"></div>
+          </details>
+        </section>
+      </div>
+    </main>
     <script src="../logica/codigo.js"></script>
-</body>
+  </body>
 </html>

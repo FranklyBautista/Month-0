@@ -1,4 +1,5 @@
 const inpuTexto = document.getElementById("taskInput");
+const opcionesPrio = document.getElementById("opPriodidad")
 const btnAgregar = document.getElementById("addBtn");
 const allSection = document.querySelector(".all");
 const completeSection = document.querySelector(".complete");
@@ -23,39 +24,38 @@ function contadorTareas(){
   contadorTareasPendiente.innerHTML=pendSection.childElementCount
 }
 
+function plantillaHtml(work,prioridad){
+  plantilla = `
+            <div class="task-item">
+                <span class="task">${work}</span>
+                <span>Prioridad: ${prioridad}</span>
+                <button class="dltBtn">Delete</button>
+                <button class="cmplBtn">Complete</button>
+                <button class="edBtn">Edit</button>
+            </div>`;
+
+  return  plantilla;
+}
+
 function renderizarTareas() {
   inpuTexto.value = "";
   allSection.innerHTML = "";
   completeSection.innerHTML = "";
   pendSection.innerHTML = "";
+  
 
   for (const t of tareas) {
     
-        allSection.innerHTML += `
-            <div class="task-item">
-                <span class="task">${t.texto}</span>
-                <button class="dltBtn">Delete</button>
-                <button class="cmplBtn">Complete</button>
-                <button class="edBtn">Edit</button>
-            </div>`;
+        allSection.innerHTML += plantillaHtml(t.texto, t.prioridad);
       
 
      if (t.complete === true && t.pendiente === false){
-        completeSection.innerHTML += `
-            <div class="task-item">
-                <span class="task">${t.texto}</span>
-                <button class="dltBtn">Delete</button>
-            </div>`;
+        completeSection.innerHTML += plantillaHtml(t.texto,t.prioridad)
+           
     }
 
      if (t.complete === false && t.pendiente === true){
-        pendSection.innerHTML += `
-            <div class="task-item">
-                <span class="task">${t.texto}</span>
-                <button class="dltBtn">Delete</button>
-                <button class="cmplBtn">Complete</button>
-                <button class="edBtn">Edit</button>
-            </div>`;
+        pendSection.innerHTML += plantillaHtml(t.texto, t.prioridad)
     } 
       
   }
@@ -65,12 +65,14 @@ function renderizarTareas() {
 
 function agregarTareas(textoPlano) {
   const texto = textoPlano.trim();
+  const op = opcionesPrio.value
   if (!texto) return;
 
   const nuevo = {
     texto,
     complete: false,
     pendiente: true,
+    prioridad: op
   };
 
 
@@ -91,6 +93,7 @@ function borrarTareas(textoPlano) {
 //Agregar Tarea
 btnAgregar.addEventListener("click", () => {
   const texto = inpuTexto.value;
+  
   if (texto !== "") {
     agregarTareas(texto);
     guardarTareas();
