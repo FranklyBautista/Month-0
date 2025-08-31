@@ -32,26 +32,22 @@
                 <span>@ 2025 Retro To-do</span>
             </div>
         </aside>
-        <section class="input-section">
+        <div class="main-section">
+             <section class="input-section">
           <input
             type="text"
             id="taskInput"
-            placeholder="Enter a new task"
+            placeholder="Añadir Nueva Tarea"
             autocomplete="off"
           />
-          <select name="prioidad-options" id="opPriodidad">
-            <option value="alta">Alta</option>
-            <option value="media">Media</option>
-            <option value="baja">Baja</option>
-          </select>
-          <button id="addBtn">add.</button>
+          <button id="addBtn">Agregar</button>
         </section>
 
         <section class="tasks">
           <details class="all-section">
             <summary>Todas <span class="counterAll">0</span></summary>
             <div class="all"></div>
-          </details>
+          </details>   
           <details class="complete-section">
             <summary>
               Completadas <span class="counterComplete">0</span>
@@ -66,6 +62,8 @@
           </details>
         </section>
       </div>
+        </div>
+       
     </main>
     <script src="../logica/codigo.js"></script>
   </body>

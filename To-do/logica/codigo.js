@@ -1,5 +1,4 @@
 const inpuTexto = document.getElementById("taskInput");
-const opcionesPrio = document.getElementById("opPriodidad")
 const btnAgregar = document.getElementById("addBtn");
 const allSection = document.querySelector(".all");
 const completeSection = document.querySelector(".complete");
@@ -65,14 +64,12 @@ function renderizarTareas() {
 
 function agregarTareas(textoPlano) {
   const texto = textoPlano.trim();
-  const op = opcionesPrio.value
   if (!texto) return;
 
   const nuevo = {
     texto,
     complete: false,
     pendiente: true,
-    prioridad: op
   };
 
 
