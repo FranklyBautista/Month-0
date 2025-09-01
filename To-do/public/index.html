@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-do List</title>
     <link rel="stylesheet" href="../styles/main.css" />
+    <link
+      rel="icon"
+      href="https://img.freepik.com/vector-premium/iconos-paginas-web_933463-107220.jpg"
+      type="image/x-icon"
+    />
   </head>
   <body>
     <main>
@@ -15,55 +20,54 @@
 
       <div class="wrap-container">
         <aside class="lateral">
-            <div class="box">
-                <h2>Filtros</h2>
-                <span>Prioridad Alta</span>
-                <span>Prioridad Media</span>
-                <span>Prioridad Baja</span>
-                <span>Mas recientes</span>
-                <span>Mas antiguos</span>
-            </div>
-            <div class="box">
-                <h2>STATS</h2>
-                <span>X Tareas completadas</span>
-                <span>X Tareas Pendientes</span>
-            </div>
-            <div class="box">
-                <span>@ 2025 Retro To-do</span>
-            </div>
+          <div class="box">
+            <h2>Filtros</h2>
+            <span>Prioridad Alta</span>
+            <span>Prioridad Media</span>
+            <span>Prioridad Baja</span>
+            <span>Mas recientes</span>
+            <span>Mas antiguos</span>
+          </div>
+          <div class="box">
+            <h2>STATS</h2>
+            <span>X Tareas completadas</span>
+            <span>X Tareas Pendientes</span>
+          </div>
+          <div class="box">
+            <span>@ 2025 Retro To-do</span>
+          </div>
         </aside>
         <div class="main-section">
-             <section class="input-section">
-          <input
-            type="text"
-            id="taskInput"
-            placeholder="Añadir Nueva Tarea"
-            autocomplete="off"
-          />
-          <button id="addBtn">Agregar</button>
-        </section>
+          <section class="input-section">
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="Añadir Nueva Tarea"
+              autocomplete="off"
+            />
+            <button id="addBtn">Agregar</button>
+          </section>
 
-        <section class="tasks">
-          <details class="all-section">
-            <summary>Todas <span class="counterAll">0</span></summary>
-            <div class="all"></div>
-          </details>   
-          <details class="complete-section">
-            <summary>
-              Completadas <span class="counterComplete">0</span>
-            </summary>
-            <div class="complete"></div>
-          </details>
-          <details class="pend-section">
-            <summary>
-              Pendientes <span class="counterPendiente">0</span>
-            </summary>
-            <div class="pend"></div>
-          </details>
-        </section>
-      </div>
+          <section class="tasks-nav">
+            <button type="button" class="todas">
+              Todas (<span class="counterAll">0</span>)
+            </button>
+            <button type="button" class="completa">
+              Completadas (<span class="counterComplete">0</span>)
+            </button>
+            <button type="button" class="pendiente">
+              Pendientes (<span class="counterPendiente">0</span>)
+            </button>
+            <button>darkMode</button>
+          </section>
+
+          <section class="every">
+            <section class="tasks-content"></section>
+            <section class="completadas"></section>
+            <section class="pendientes"></section>
+          </section>
         </div>
-       
+      </div>
     </main>
     <script src="../logica/codigo.js"></script>
   </body>
